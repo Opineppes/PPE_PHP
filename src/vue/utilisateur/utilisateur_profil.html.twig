@@ -1,0 +1,86 @@
+{% extends "base.html.twig" %}
+
+{% block title %} 
+    {{ parent() }} - Profil utilisateur
+{% endblock %}
+
+{% block contenu %}
+
+    {% include 'popup_message.html.twig' %}
+    {% include 'utilisateur/utilisateur_form_modif.html.twig' with {'infos_page': infos_page} %} <!-- ajout du formulaire de modification (à modifier en fonction de la page) -->
+
+    <h1 id="hello-page-message" class="mb-3">{{element.nom | upper}} {{element.prenom}}</h1> <!-- Titre en gros sur la page (à modifier en fonction de la page) -->
+    <div class="card">
+        <div class="card-header bg-purple">
+            <div class="row">
+                <div class="col-sm-6">Informations personnel</div> <!-- Titre de la liste (à modifier en fonction de la page) -->
+                <div class="col-sm-6 text-right">
+                    <a href="index.php?page=utilisateurprofilmodif&email={{element.email}}">Modifier</a>
+                </div> 
+            </div>
+        </div>
+        <div class="cord-body">
+            <table class="table">
+                <tr>
+                    <th class="border-right text-muted" scope="row" width="200px">Nom</th>
+                    <td>{{element.nom}}</td>
+                </tr>
+                <tr>
+                    <th class="border-right text-muted" scope="row" width="200px">Prénom</th>
+                    <td>{{element.prenom}}</td>
+                </tr>
+                <tr>
+                    <th class="border-right text-muted" scope="row" width="200px">Adresse Mail</th>
+                    <td>{{element.email}}</td>
+                </tr>
+                <tr>
+                    <th class="border-right text-muted" scope="row" width="200px">Role</th>
+                    <td>{{element.libelleRole}}</td>
+                </tr>
+            </table>
+        </div>
+        {% if element.idDev is defined %}
+        <div class="card-header bg-purple">
+            <div class="row">
+                <div class="col-sm-6">Outils maitrisés</div> <!-- Titre de la liste (à modifier en fonction de la page) -->
+                <div class="col-sm-6 text-right">
+                    <a href="index.php?page=utilisateurprofilmodif&email={{element.email}}">Modifier</a>
+                </div> 
+            </div>
+        </div>
+        <div class="cord-body">
+            <table class="table">
+                {% if element.liste_maitrise|length == 0 %}
+                <tr><td>Ce developpeur ne maitrise aucun outil.</td></tr>
+                {% endif %}
+                {% for e in element.liste_maitrise %}
+                <tr>
+                    <th class="text-muted" scope="row" width="150px">{{e.libelle}}</th>
+                    <th class="border-right text-muted text-center" scope="row" width="100px">{{e.version}}</th>
+                    <td>{{e.niveau}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="card-header bg-purple">
+            <div class="row">
+                <div class="col-sm-6">Equipe(s)</div> <!-- Titre de la liste (à modifier en fonction de la page) -->
+            </div>
+        </div>
+        <div class="cord-body">
+            <table class="table">
+                {% if element.liste_equipe|length == 0 %}
+                <tr><td>Ce developpeur n'appartient a aucune equipe.</td></tr>
+                {% endif %}
+                {% for e in element.liste_equipe %}
+                <tr>
+                    <th class="text-muted" scope="row" width="150px">{{e.libelle}} {% if element.idDev == e.idResponsable %} <i class="font-weight-bold">(Responsable)</i>{% endif %}</th>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

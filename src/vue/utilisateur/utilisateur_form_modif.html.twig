@@ -1,0 +1,72 @@
+{% if infos_page.element_infos is defined %}
+
+<div class="modal" id="modal-form-modif" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="index.php?page={{page}}" method="post" enctype="application/x-www-form-urlencoded"> <!-- (à modifier en fonction de la page) -->
+                <div class="modal-header">
+                    <h5 class="modal-title">Modification d'un utilisateur</h5> <!-- Titre du popup d'ajout (à modifier en fonction de la page) -->
+                </div>
+                <div class="modal-body"> <!-- Entrée du formulaire -->
+                    {% if infos_page.message_invalid_modif is defined %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ infos_page.message_invalid_modif }} <!-- affichage du message d'erreur -->
+                    </div>
+                    {% endif %}
+
+                    <input name="email" type="hidden" value="{{ infos_page.element_infos.email }}"/> <!-- clef permettant d'idientifier l'element (à modifier en fonction de la page) -->
+
+                    <!-- (à modifier en fonction de la page) -->
+                    <small class="text-danger">( Veuillez laisser ces deux champs vides si vous ne souhaitez pas modifer le mot de passe )</small>
+                    <div class="form-group mt-3"> <!-- Entrée du mot de pass -->
+                        <label for="password">Mot de passe</label>
+                        <input id="password" name="inputPassword" type="password" class="form-control" placeholder="Mot de passe"/>
+                    </div>
+
+                    <div class="form-group"> <!-- Entrée du mot de passe de confirmation -->
+                        <label for="password2">Confirmation du mot de passe</label>
+                        <input id="password2" name="inputPassword2" type="password" class="form-control" placeholder="Confirmation du mot de passe"/>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group"> <!-- Entrée du nom de l'utilisateur -->
+                        <label for="nom">Nom</label>
+                        <input id="nom" name="inputNom" type="text" class="form-control" placeholder="Nom" value="{{ infos_page.element_infos.nom }}" required/>
+                    </div>
+
+                    <div class="form-group"> <!-- Entrée du prenom de l'utilisateur -->
+                        <label for="prenom">Prénom</label>
+                        <input id="prenom" name="inputPrenom" type="text" class="form-control" placeholder="Prénom" value="{{ infos_page.element_infos.prenom }}" required/>
+                    </div>
+
+                    <div class="form-group"> <!-- Entrée du role de l'utilisateur -->
+                        <label for="role">Role</label>
+                        <select id="role" class="form-control" name="inputRole">
+                        {% for r in liste_role %}
+                            {% if r.id == infos_page.element_infos.idRole %}
+                            <option value="{{ r.id }}" selected>{{ r.libelle }}</option>
+                            {% else %}
+                            <option value="{{ r.id }}">{{ r.libelle }}</option>   
+                            {% endif %}    
+                        {% endfor %}
+                        </select>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button name="btModifier" type="submit" class="btn btn-purple">Modifier</button> <!-- Validation du formulaire -->
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Annuler</button> <!-- Annulation du formulaire -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $("#modal-form-modif").modal("show");
+    });
+</script>
+
+{% endif %}

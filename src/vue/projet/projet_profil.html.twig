@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+
+{% block title %} 
+    {{ parent() }} - Profil projet
+{% endblock %}
+
+{% block contenu %}
+
+{% if infos_page.popup_message %}
+    {% include 'popup.html.twig' with {'message': infos_page.popup_message, 'type': infos_page.popup_type} %} <!-- Message de succes en cas de suppression reussi -->
+{% endif %}
+
+{% include 'projet/projet_form_modif.html.twig' with {'infos_page': infos_page} %} <!-- ajout du formulaire de modification (à modifier en fonction de la page) -->
+
+<h1 id="hello-page-message" class="mb-3">{{element.libelleProjet | upper}}</h1> <!-- Titre en gros sur la page (à modifier en fonction de la page) -->
+<div class="card">
+    <div class="card-header bg-purple">
+        <div class="row">
+            <div class="col-sm-6">Informations projet</div> <!-- Titre de la liste (à modifier en fonction de la page) -->
+            <div class="col-sm-6 text-right">
+                <a href="index.php?page=projetprofilmodif&id={{element.id}}">Modifier</a>
+                <a href="index.php?page=projetsuppr&id={{element.id}}">Supprimer</a>
+            </div> 
+        </div>
+    </div>
+    <div class="cord-body">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th class="border-right text-muted" scope="row" width="200px">libelle</th>
+                    <td id="profil-Nom">{{element.libelleProjet}}</td>
+                </tr>
+                <tr>
+                    <th class="border-right text-muted" scope="row" width="200px">code</th>
+                    <td id="profil-Prenom">{{element.code}}</td>
+                </tr>
+                <tr>
+                    <th class="border-right text-muted" scope="row" width="200px">Nom équipe</th>
+                    <td id="profil-Email">{{element.libelleEquipe}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-header bg-purple">
+        <div class="row">
+            <div class="col-sm-6">Tache(s)</div> <!-- Titre de la liste (à modifier en fonction de la page) -->
+        </div>
+    </div>
+    <div class="cord-body">
+        <table class="table">
+        <tr><th>Libelle</th><th>Cout</th><th>Heures</th><th>Nom prénom</th><th></th></tr>
+        {% if element.liste_tache|length == 0 %}
+            <tr><td>Ce projet n'a aucune taches.</td></tr>
+            {% endif %}
+           {% for u in element.liste_tache %}
+                <tr> <!-- Liste des valeurs des champs (à modifier en fonction de la page) -->
+                    <td>{{u.libelle}}</td>
+                    <td>{{u.cout}}</td>
+                    <td>{{u.heures}}</td>
+                    <td>{{u.nom}} {{u.prenom}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

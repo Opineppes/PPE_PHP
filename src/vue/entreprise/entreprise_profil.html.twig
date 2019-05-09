@@ -1,0 +1,55 @@
+{% extends "base.html.twig" %}
+
+{% block title %} 
+    {{ parent() }} - Profil entreprise
+{% endblock %}
+
+{% block contenu %}
+
+{% if infos_page.popup_message %}
+    {% include 'popup.html.twig' with {'message': infos_page.popup_message, 'type': infos_page.popup_type} %} <!-- Message de succes en cas de suppression reussi -->
+{% endif %}
+
+{% include 'entreprise/entreprise_form_modif.html.twig' with {'infos_page': infos_page} %} <!-- ajout du formulaire de modification (à modifier en fonction de la page) -->
+
+<h1 id="hello-page-message" class="mb-3">{{element.libelle | upper}}</h1> <!-- Titre en gros sur la page (à modifier en fonction de la page) -->
+<div class="card">
+    <div class="card-header bg-purple">
+        <div class="row">
+            <div class="col-sm-6">Informations entreprise</div> <!-- Titre de la liste (à modifier en fonction de la page) -->
+            <div class="col-sm-6 text-right">
+                <a href="index.php?page=entrepriseprofilmodif&id={{element.id}}">Modifier</a>
+                <a href="index.php?page=entreprisesuppr&id={{element.id}}">Supprimer</a>
+            </div> 
+        </div>
+    </div>
+    <div class="cord-body">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th class="border-right text-muted" scope="row" width="200px">libelle</th>
+                    <td id="profil-Nom">{{element.libelle}}</td>
+                </tr>
+                <tr>
+                    <th class="border-right text-muted" scope="row" width="200px">adresse</th>
+                    <td id="profil-Prenom">{{element.adresse}}</td>
+                </tr>
+                <tr>
+                    <th class="border-right text-muted" scope="row" width="200px">Code Postal</th>
+                    <td id="profil-Email">{{element.cp}}</td>
+                </tr>
+                <tr>
+                    <th class="border-right text-muted" scope="row" width="200px">ville</th>
+                    <td id="profil-Rang">{{element.ville}}</td>
+                </tr>
+                <tr>
+                    <th class="border-right text-muted" scope="row" width="200px">Nom du contact</th>
+                    <td id="profil-Rang">{{element.nomContact}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

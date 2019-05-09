@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+
+{% block title %} 
+    {{ parent() }} - Gestion des contrats
+{% endblock %}
+
+{% block contenu %}
+
+    {% include 'tache/tache_form_ajout.html.twig' with {'infos_page': infos_page} %} <!-- ajout du formulaire d'ajout (à modifier en fonction de la page) -->
+    {% include 'tache/tache_form_modif.html.twig' with {'infos_page': infos_page} %} <!-- ajout du formulaire de modification (à modifier en fonction de la page) -->
+
+    {% if infos_page.popup_message %}
+        {% include 'popup.html.twig' with {'message': infos_page.popup_message, 'type': infos_page.popup_type} %} <!-- Message de succes en cas de suppression reussi -->
+    {% endif %}
+
+    <h1 id="hello-page-message" class="mb-3">Gestion des taches </h1> <!-- Titre en gros sur la page (à modifier en fonction de la page) -->
+    <div class="card">
+        <div class="card-header bg-purple">
+            <div class="row">
+                <div class="col-sm-6">Liste des taches</div> <!-- Titre de la liste (à modifier en fonction de la page) -->
+                <div class="col-sm-6 text-right">
+                    <a class="white" data-toggle="modal" data-target="#modal-form-ajout" href="#">Ajouter une tache</a> <!-- Bouton d'ajout (à modifier en fonction de la page) -->
+                </div> 
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr> <!-- Liste des titre des champs (à modifier en fonction de la page) -->
+                        <th>Libelle</th><th>Cout</th><th>Heure(s)</th><th>Developpeur en charge </th><th>Nom du projet</th><th></th><th></th>
+                    </tr>
+                </thead>
+                {% for u in liste %}
+                <tr> <!-- Liste des valeurs des champs (à modifier en fonction de la page) -->
+                    <td>{{u.libelle}}</td>
+                    <td>{{u.cout}}</td>
+                    <td>{{u.heures}}</td>
+                    <td>{{u.nom}} {{u.prenom}}</td>
+                    <td>{{u.nProjet}}</td>
+                    <!-- Lien vers la modification (à modifier en fonction de la page) -->
+                    <td><a href="index.php?page=tachemodif&code={{u.code}}"><i class="glyphicon glyphicon-pencil purple"></i></a></td>
+                    <!-- Button de suppression (à modifier en fonction de la page) -->
+                    <td><a href="index.php?page=tachesuppr&code={{u.code}}"><i class="glyphicon glyphicon-trash purple"></i></a></td>
+                </tr>
+                {% endfor %}    
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

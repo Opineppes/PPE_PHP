@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title> {% block title %} Simpléduc - Gestion des projets {% endblock %}</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/glyphicon.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/script.js"></script>
+        {% block scripts %}{% endblock %}
+
+        <link rel="icon" type="image/png" href="favicon.ico" />
+        {% block style %}{% endblock %}
+    </head>    
+    <body class="bg-light">
+        {% block body %}
+
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-purple">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a id="navbar-brand-container" class="navbar-brand" href="#">
+                    <img id="navbar-brand" class="rounded-circle" alt="Brand" src="images/logo.png"/>
+                </a>
+                <div id="navbar-collapse" class="collapse navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item {% if page == "accueil" %}active{% endif %}"> <a class="nav-link" href="index.php">Accueil</a> </li>
+
+                        {% if session.login is defined %} {% if session.role == 1 %}
+                        <li class="nav-item dropdown">
+                            {% if ("tache" in page) or ("developpeur" in page) or ("utilisateur" in page) or ("equipe" in page) or ("outil" in page) or ("entreprise" in page) or ("contrat" in page) or ("projet" in page) or ("remuneration" in page) %}
+                            <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#"> Administration </a>
+                            {% else %}
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> Administration </a>
+                            {% endif %}
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item {% if "utilisateur" in page %}active{% endif %}" href="index.php?page=utilisateur">Gestion des utilisateurs</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a class="dropdown-item {% if "developpeur" in page %}active{% endif %}" href="index.php?page=developpeur">Gestion des developpeurs</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a class="dropdown-item {% if "equipe" in page %}active{% endif %}" href="index.php?page=equipe">Gestion des équipes</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a class="dropdown-item {% if "outil" in page %}active{% endif %}" href="index.php?page=outil">Gestion des outils</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a class="dropdown-item {% if "entreprise" in page %}active{% endif %}" href="index.php?page=entreprise">Gestion des entreprises</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a class="dropdown-item {% if "contrat" in page %}active{% endif %}" href="index.php?page=contrat">Gestion des contrats</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a class="dropdown-item {% if "projet" in page %}active{% endif %}" href="index.php?page=projet">Gestion des projets</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a class="dropdown-item {% if "remuneration" in page %}active{% endif %}" href="index.php?page=remuneration">Gestion des rémunérations</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a class="dropdown-item {% if "tache" in page %}active{% endif %}" href="index.php?page=tache">Gestion des taches</a></li>
+                            </ul>
+                        </li>
+                        {% endif %} {% endif %}
+
+                        <li class="nav-item {% if page == "apropos" %}active{% endif %}"><a class="nav-link" href="index.php?page=apropos">À propos</a></li>
+                        <li class="nav-item {% if page == "mentions" %}active{% endif %}"><a class="nav-link" href="index.php?page=mentions">Mentions légales</a></li>
+
+                        {%if session.login is defined %}
+                        <li class="nav-item"><a class="nav-link" href="index.php?page=deconnexion">Se déconnecter</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">{{session.login}}</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+            
+        <div id="contenu" class="container" >
+            {% block contenu %}{% endblock %} 
+        </div>
+        {% endblock %}
+    </body>
+</html>

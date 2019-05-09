@@ -1,0 +1,64 @@
+{% if infos_page.element_infos is defined %}
+
+<div class="modal" id="modal-form-modif" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="index.php?page=developpeurmodif" method="post" enctype="application/x-www-form-urlencoded"> <!-- (à modifier en fonction de la page) -->
+                <div class="modal-header">
+                    <h5 class="modal-title">Modification d'un profil developpeur</h5> <!-- Titre du popup d'ajout (à modifier en fonction de la page) -->
+                </div>
+                <div class="modal-body"> <!-- Entrée du formulaire -->
+                    {% if infos_page.message_invalid_modif is defined %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ infos_page.message }} <!-- affichage du message d'erreur -->
+                    </div>
+                    {% endif %}
+
+                    <input name="id" type="hidden" value="{{ infos_page.element_infos.id }}"/> <!-- clef permettant d'idientifier l'element (à modifier en fonction de la page) -->
+
+                    <!-- (à modifier en fonction de la page) -->
+
+                    <div class="form-group"> <!-- Entrée du libellé -->
+                        <label for="utilisateur">Pour l'utilisateur</label>
+                        <input id="utilisateur" type="text" class="form-control" value="{{ infos_page.element_infos.email }}" disabled/>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group"> <!-- Entrée du libellé -->
+                        <label for="telephone">Téléphone professionel</label>
+                        <input id="telephone" class="form-control" name="inputTelephone" value="{{ infos_page.element_infos.tel }}" type="tel" pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" placeholder="Téléphone" required>
+                        <small class="ml-2 form-text text-muted">ex: 06 12 34 56 78</small>
+                    </div>
+
+                    <div class="form-group"> <!-- Entrée du libellé -->
+                        <label for="remuneration">Remunération</label>
+                        <select id="remuneration" name="inputIdRemuneration" class="form-control" required>
+                        {% for u in liste_remuneration %}
+                            {% if infos_page.element_infos.idRem == u.id %}
+                            <option value="{{ u.id }}" selected>{{ u.coutHoraire }}</option>
+                            {% else %}
+                            <option value="{{ u.id }}">{{ u.coutHoraire }}</option>
+                            {% endif %}
+                        {% endfor %}
+                        </select>
+                    </div>
+                    
+
+                </div>
+                <div class="modal-footer">
+                    <button name="btModifier" type="submit" class="btn btn-purple">Modifier</button> <!-- Validation du formulaire -->
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Annuler</button> <!-- Annulation du formulaire -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $("#modal-form-modif").modal("show");
+    });
+</script>
+
+{% endif %}

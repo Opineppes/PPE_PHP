@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+
+{% block title %} 
+    {{ parent() }} - Gestion des developpeurs
+{% endblock %}
+
+{% block contenu %}
+
+    {% include 'developpeur/developpeur_form_ajout.html.twig' with {'infos_page': infos_page} %} <!-- ajout du formulaire d'ajout (à modifier en fonction de la page) -->
+    {% include 'developpeur/developpeur_form_modif.html.twig' with {'infos_page': infos_page} %} <!-- ajout du formulaire de modification (à modifier en fonction de la page) -->
+
+    {% if infos_page.popup_message %}
+        {% include 'popup.html.twig' with {'message': infos_page.popup_message, 'type': infos_page.popup_type} %} <!-- Message de succes en cas de suppression reussi -->
+    {% endif %}
+
+    <h1 id="hello-page-message" class="mb-3">Gestion des developpeurs </h1> <!-- Titre en gros sur la page (à modifier en fonction de la page) -->
+    <div class="card">
+        <div class="card-header bg-purple">
+            <div class="row">
+                <div class="col-sm-6">Liste des developpeur</div> <!-- Titre de la liste (à modifier en fonction de la page) -->
+                <div class="col-sm-6 text-right">
+                    <a class="white" data-toggle="modal" data-target="#modal-form-ajout" href="#">Créer un profil developpeur</a> <!-- Bouton d'ajout (à modifier en fonction de la page) -->
+                </div> 
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr> <!-- Liste des titre des champs (à modifier en fonction de la page) -->
+                        <th>Nom</th><th>Prenom</th><th>Email</th><th>Téléphone pro</th><th>Cout horaire</th><th></th>   <th></th><th></th>
+                    </tr>
+                </thead>
+                {% for u in liste %}
+                <tr> <!-- Liste des valeurs des champs (à modifier en fonction de la page) -->
+                    <td>{{u.nom}}</td>
+                    <td>{{u.prenom}}</td>
+                    <td><a class="purple" href="mailto:{{u.email}}"><i class="glyphicon glyphicon-envelope"></i> {{u.email}}</a></td>
+                    <td><a class="purple" href="tel:{{u.tel}}"><i class="glyphicon glyphicon-phone"></i> {{u.tel}}</a></td>
+                    <td>{{u.coutHoraire}}</td>
+                    <!-- Lien vers le profil (à modifier en fonction de la page) -->
+                    <td><a class="purple" href="index.php?page=utilisateurprofil&email={{u.email}}"><i class="glyphicon glyphicon-user"></i> Profil</a></td>
+                    <!-- Lien vers la modification (à modifier en fonction de la page) -->
+                    <td><a class="purple" href="index.php?page=developpeurmodif&id={{u.id}}"><i class="glyphicon glyphicon-pencil"></i></a></td>
+                    <!-- Button de suppression (à modifier en fonction de la page) -->
+                    <td><a class="purple" href="index.php?page=developpeursuppr&id={{u.id}}"><i class="glyphicon glyphicon-trash"></i></a></td>
+                </tr>
+                {% endfor %}    
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

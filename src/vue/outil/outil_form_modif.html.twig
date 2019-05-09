@@ -1,0 +1,44 @@
+{% if infos_page.element_infos is defined %}
+
+<div class="modal" id="modal-form-modif" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="index.php?page=outilmodif" method="post" enctype="application/x-www-form-urlencoded"> <!-- (à modifier en fonction de la page) -->
+                <div class="modal-header">
+                    <h5 class="modal-title">Modification d'un outil</h5> <!-- Titre du popup d'ajout (à modifier en fonction de la page) -->
+                </div>
+                <div class="modal-body"> <!-- Entrée du formulaire -->
+                    {% if infos_page.message_invalid_modif is defined %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ infos_page.message }} <!-- affichage du message d'erreur -->
+                    </div>
+                    {% endif %}
+
+                    <input name="id" type="hidden" value="{{ infos_page.element_infos.id }}"/> <!-- clef permettant d'idientifier l'element (à modifier en fonction de la page) -->
+
+                    <!-- (à modifier en fonction de la page) -->
+
+                    <div class="form-group"> <!-- Entrée du libellé -->
+                        <label for="libelle">Libellé</label>
+                        <input id="libelle" name="inputLibelle" type="text" class="form-control" placeholder="Libellé" value="{{ infos_page.element_infos.libelle }}" needed/>
+                        <label for="version">Version</label>
+                        <input id="version" name="inputVersion" type="text" class="form-control" placeholder="version" value="{{ infos_page.element_infos.version }}" needed/>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button name="btModifier" type="submit" class="btn btn-purple">Modifier</button> <!-- Validation du formulaire -->
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Annuler</button> <!-- Annulation du formulaire -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $("#modal-form-modif").modal("show");
+    });
+</script>
+
+{% endif %}

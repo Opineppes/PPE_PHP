@@ -1,0 +1,60 @@
+{% if infos_page.element_infos is defined %}
+
+<div class="modal" id="modal-form-modif" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="index.php?page=projetmodif" method="post" enctype="application/x-www-form-urlencoded"> <!-- (à modifier en fonction de la page) -->
+                <div class="modal-header">
+                    <h5 class="modal-title">Modification d'un projet</h5> <!-- Titre du popup d'ajout (à modifier en fonction de la page) -->
+                </div>
+                <div class="modal-body"> <!-- Entrée du formulaire -->
+                    {% if infos_page.message_invalid_modif is defined %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ infos_page.message }} <!-- affichage du message d'erreur -->
+                    </div>
+                    {% endif %}
+
+                    <input name="code" type="hidden" value="{{ infos_page.element_infos.code }}"/> <!-- clef permettant d'idientifier l'element (à modifier en fonction de la page) -->
+
+                    <!-- (à modifier en fonction de la page) -->
+
+                    <div class="form-group"> <!-- Entrée du libellé -->
+                        <label for="libelleProjet">Libellé du projet</label>
+                        <input id="libelleProjet" name="inputLibelleProjet" type="text" class="form-control" placeholder="Libellé" value="{{ infos_page.element_infos.libelleProjet }}" needed/>
+                    </div>
+
+                    <div class="form-group"> <!-- Entrée du responsable d'equipe -->
+                        <label for="equipe">Equipe</label>
+                        <select id="equipe" name="inputIdEquipe" class="form-control" required/>
+                        {% if infos_page.element_infos.idEquipe == null %} 
+                            <option value="non" selected>Equipe non reconnue</option> 
+                        {% else %}
+                            <option value="non">Equipe non reconnue</option>
+                        {% endif %}      
+                        {% for u in liste_equipe %}
+                            {% if infos_page.element_infos.idEquipe == u.id %}  
+                            <option value="{{ u.id }}" selected>{{ u.libelle }} </option> 
+                            {% else %} 
+                            <option value="{{ u.id }}">{{ u.libelle }} </option>
+                            {% endif %}      
+                        {% endfor %}    
+                        </select>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button name="btModifier" type="submit" class="btn btn-purple">Modifier</button> <!-- Validation du formulaire -->
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Annuler</button> <!-- Annulation du formulaire -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $("#modal-form-modif").modal("show");
+    });
+</script>
+
+{% endif %}

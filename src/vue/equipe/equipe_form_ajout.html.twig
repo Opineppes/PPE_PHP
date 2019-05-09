@@ -1,0 +1,35 @@
+<div class="modal" id="modal-ajout" tabindex="-1"> <!-- Modal id: modal-ajout -->
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form id="modal-ajout-form" method="post" enctype="application/x-www-form-urlencoded"> <!-- Modal form id: modal-ajout-form -->
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajout d'une equipe</h5>
+                </div>
+                <div class="modal-body">
+                    <div id="modal-ajout-message" class="alert alert-danger"> <!-- Modal message id: modal-ajout-message -->
+                    </div>
+
+                    <div class="form-group">
+                        <label for="libelle">Libellé</label>
+                        <input id="libelle" name="inputLibelle" type="text" class="form-control" placeholder="Libellé" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="responsable">Responsable</label>
+                        <select id="responsable" name="inputIdResponsable" class="form-control" required/>
+                            <option value="non">Responsable non identifié</option> 
+                        {% for u in liste_developpeur %}
+                            <option value="{{ u.id }}">{{ u.nom }} {{ u.prenom }}</option>  
+                        {% endfor %}    
+                        </select>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-purple">Ajouter</button>
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

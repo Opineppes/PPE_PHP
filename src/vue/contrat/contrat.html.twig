@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block title %} 
+    {{ parent() }} - Gestion des contrats
+{% endblock %}
+{% block scripts %}
+    <script src="js/script_contrat.js"></script>
+{% endblock %}
+{% block contenu %}
+
+    {% include 'contrat/contrat_form_ajout.html.twig' with {'infos_page': infos_page} %} <!-- ajout du formulaire d'ajout (à modifier en fonction de la page) -->
+    {% include 'contrat/contrat_form_modif.html.twig' with {'infos_page': infos_page} %} <!-- ajout du formulaire de modification (à modifier en fonction de la page) -->
+
+    {% if infos_page.popup_message %}
+        {% include 'popup.html.twig' with {'message': infos_page.popup_message, 'type': infos_page.popup_type} %} <!-- Message de succes en cas de suppression reussi -->
+    {% endif %}
+
+    <h1 id="hello-page-message" class="mb-3">Gestion des contrats </h1> <!-- Titre en gros sur la page (à modifier en fonction de la page) -->
+    <div class="card">
+        <div class="card-header bg-purple">
+            <div class="row">
+                <div class="col-sm-6">Liste des contrats</div> <!-- Titre de la liste (à modifier en fonction de la page) -->
+                <div class="col-sm-6 text-right">
+                    <a class="white" data-toggle="modal" data-target="#modal-form-ajout" href="#">Ajouter un contrat</a> <!-- Bouton d'ajout (à modifier en fonction de la page) -->
+                </div> 
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr> <!-- Liste des titre des champs (à modifier en fonction de la page) -->
+                        <th>Date Debut</th><th>Date Fin</th><th>Date Signature</th><th>Cout</th><th>Nom du projet</th><th>Nom de l'entreprise</th><th></th><th></th>
+                    </tr>
+                </thead>
+                <tbody id="table-contrat">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,144 @@
+h1 {
+    text-align: center;
+    color: #522472;
+}
+
+a {
+    color: #ffffff;
+}
+
+a:hover {
+    color: #ffffff;
+}
+
+a:active {
+    color: #959595;
+}
+
+a.purple:hover {
+    color: #823ab6;
+}
+
+a.purple:active {
+    color: #823ab6;
+}
+
+.bg-purple {
+    background-color: #522472;
+    color: #FFFFFF;
+}
+
+.purple {
+    color: #522472;
+}
+
+.btn-purple {
+    color: #fff;
+    background-color: #522472;
+    border-color: #522472;
+}
+  
+.btn-purple:hover {
+    color: #fff;
+    background-color: #451e61;
+    border-color: #341749;
+}
+  
+.btn-purple:focus, .btn-purple.focus {
+    box-shadow: 0 0 0 0.2rem rgba(80, 0, 145, 0.5);
+}
+  
+.btn-purple.disabled, .btn-purple:disabled {
+    color: #fff;
+    background-color: #522472;
+    border-color: #522472;
+}
+  
+.btn-purple:not(:disabled):not(.disabled):active, .btn-purple:not(:disabled):not(.disabled).active,
+.show > .btn-purple.dropdown-toggle {
+    color: #fff;
+    background-color: #341749;
+    border-color: #2b143b;
+}
+  
+.btn-purple:not(:disabled):not(.disabled):active:focus, .btn-purple:not(:disabled):not(.disabled).active:focus,
+.show > .btn-purple.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(80, 0, 145, 0.5);
+}
+
+#navbar {
+    border-radius: 3px;
+}
+
+#navbar-brand {
+    position: absolute;
+    top: 10px;
+}
+
+#navbar-brand-container {
+    width: 100px;
+}
+
+#contenu {
+    margin-top: 25px;
+}
+
+#hello-page-message {
+    font-size: 28px;
+}
+
+@media (min-width: 576px) {
+    .container {
+        max-width: 100%;
+    }
+}
+  
+@media (min-width: 768px) {
+    .container {
+        max-width: 100%;
+    }
+}
+  
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+  
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+
+
+
+/*
+
+.blanc{
+  color: #FFF;
+}
+
+button{
+   background-color: #522472;
+   color: #FFF; 
+}
+
+.violet{
+  color: #522472;
+}
+
+.h3 {
+  text-align: center;
+  color: #522472;
+}
+
+.btn-lg{
+   background-color: #522472;    
+   color: #FFF;
+}
+
+*/
+
+

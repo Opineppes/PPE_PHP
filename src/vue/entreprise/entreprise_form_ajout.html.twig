@@ -1,0 +1,55 @@
+<div class="modal" id="modal-form-ajout" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="index.php?page=entrepriseajout" method="post" enctype="application/x-www-form-urlencoded"> <!-- (à modifier en fonction de la page) -->
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajout d'une entrepise</h5> <!-- Titre du popup d'ajout (à modifier en fonction de la page) -->
+                </div>
+                <div class="modal-body"> <!-- Entrée du formulaire -->
+                    {% if infos_page.message_invalid_ajout is defined %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ infos_page.message_invalid_ajout }} <!-- affichage du message d'erreur -->
+                    </div>
+                    {% endif %}
+
+                    <!-- (à modifier en fonction de la page) -->
+                    <div class="form-group"> <!-- Entrée du libelle-->
+                        <label for="adresse">Libelle</label>
+                        <input id="libelle" name="inputLibelle" type="text" class="form-control" placeholder="Libelle"  required/>
+                    </div>
+                    <div class="form-group"> <!-- Entrée de l'adresse -->
+                        <label for="adresse">Adresse</label>
+                        <input id="adresse" name="inputAdresse" type="text" class="form-control" placeholder="Adresse" required/>
+                    </div>
+                    <div class="form-group"> <!-- Entrée du CP -->
+                        <label for="cp">Code Postal</label>
+                        <input id="cp" name="inputCp" type="text" class="form-control" placeholder="Code postal"  required/>
+                    </div>
+                    <div class="form-group"> <!-- Entrée de la Ville -->
+                        <label for="ville">Ville</label>
+                        <input id="ville" name="inputVille" type="text" class="form-control" placeholder="Ville"  required/>
+                    </div>                    
+                    <div class="form-group"> <!-- Entrée de nomContact -->
+                        <label for="nomContact">Nom du contact</label>
+                        <input id="nomContact" name="inputNomContact" type="text" class="form-control" placeholder="nom du contact"  required/>
+                    </div>  
+                   
+
+                </div>
+                <div class="modal-footer">
+                    <button name="btAjouter" type="submit" class="btn btn-purple">Ajouter</button> <!-- Validation du formulaire -->
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Annuler</button> <!-- Annulation du formulaire -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% if infos_page.message_invalid_ajout is defined %} 
+<script>
+    $(document).ready(function(){
+        $("#modal-form-ajout").modal("show");
+    });
+</script>
+{% endif %}

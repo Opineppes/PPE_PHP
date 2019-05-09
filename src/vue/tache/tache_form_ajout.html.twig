@@ -1,0 +1,70 @@
+<div class="modal" id="modal-form-ajout" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="index.php?page=tacheajout" method="post" enctype="application/x-www-form-urlencoded"> <!-- (à modifier en fonction de la page) -->
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajout d'une tache</h5> <!-- Titre du popup d'ajout (à modifier en fonction de la page) -->
+                </div>
+                <div class="modal-body"> <!-- Entrée du formulaire -->
+                    {% if infos_page.message_invalid_ajout is defined %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ infos_page.message_invalid_ajout }} <!-- affichage du message d'erreur -->
+                    </div>
+                    {% endif %}
+
+                    <!-- (à modifier en fonction de la page) -->
+
+                    <div class="form-group"> <!-- Entrée du date debut -->
+                        <label for="libelle">libelle</label>
+                        <input id="libelle" name="inputLibelle" type="text" class="form-control" placeholder="Libelle" required>
+                    </div>
+
+                    <div class="form-group"> <!-- Entrée du date fin -->
+                        <label for="cout">cout</label>
+                        <input id="cout" name="inputCout" type="number" class="form-control" placeholder="cout" required>
+                    </div>  
+
+                    <div class="form-group"> <!-- Entrée du date signature -->
+                        <label for="heures">heure(s)</label>
+                        <input id="heures" name="inputHeures" type="number" class="form-control" placeholder="Heure(s)" required>
+                    </div>                    
+
+
+                    <div class="form-group"> <!-- Entrée du Code projet -->
+                        <label for="idDev">developpeur</label>
+                        <select id="idDev" name="inputIdDev" class="form-control" required/>
+                            <option value="non">developpeur non identifié</option> 
+                        {% for u in liste_developpeur %}
+                            <option value="{{ u.id}}">{{ u.tel }} {{ u.idUtilisateur }}</option>  
+                        {% endfor %}    
+                        </select>
+                    </div>
+
+                    <div class="form-group"> <!-- Entrée de l'entreprise -->
+                        <label for="codeProjet">projet</label>
+                        <select id="codeProjet" name="inputCodeProjet" class="form-control" required/>
+                            <option value="non">Projet non identifié</option> 
+                        {% for u in liste_projet %}
+                            <option value="{{ u.code}}">{{ u.libelleProjet}}</option>  
+                        {% endfor %}    
+                        </select>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button name="btAjouter" type="submit" class="btn btn-purple">Ajouter</button> <!-- Validation du formulaire -->
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Annuler</button> <!-- Annulation du formulaire -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% if infos_page.message_invalid_ajout is defined %} 
+<script>
+    $(document).ready(function(){
+        $("#modal-form-ajout").modal("show");
+    });
+</script>
+{% endif %}

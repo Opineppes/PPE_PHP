@@ -1,0 +1,71 @@
+<div class="modal" id="modal-form-ajout" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="index.php?page=contratajout" method="post" enctype="application/x-www-form-urlencoded"> <!-- (à modifier en fonction de la page) -->
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajout d'une contrat</h5> <!-- Titre du popup d'ajout (à modifier en fonction de la page) -->
+                </div>
+                <div class="modal-body"> <!-- Entrée du formulaire -->
+                    {% if infos_page.message_invalid_ajout is defined %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ infos_page.message_invalid_ajout }} <!-- affichage du message d'erreur -->
+                    </div>
+                    {% endif %}
+
+                    <!-- (à modifier en fonction de la page) -->
+
+                    <div class="form-group"> <!-- Entrée du date debut -->
+                        <label for="libelle">date debut</label>
+                        <input id="dateDebut" name="inputDateDebut" type="date" class="form-control" placeholder="Date debut" required>
+                    </div>
+                    <div class="form-group"> <!-- Entrée du date fin -->
+                        <label for="libelle">date fin</label>
+                        <input id="dateFin" name="inputDateFin" type="date" class="form-control" placeholder="Date fin" required>
+                    </div>                    
+                    <div class="form-group"> <!-- Entrée du date signature -->
+                        <label for="libelle">date signature</label>
+                        <input id="dateSignature" name="inputDateSignature" type="date" class="form-control" placeholder="Date Signature" required>
+                    </div>                    
+                    <div class="form-group"> <!-- Entrée du cout -->
+                        <label for="libelle">cout</label>
+                        <input id="cout" name="inputCout" type="text" class="form-control" placeholder="Cout" required>
+                    </div>
+
+                    <div class="form-group"> <!-- Entrée du Code projet -->
+                        <label for="projet">Projet</label>
+                        <select id="codeprojet" name="inputCodeProjet" class="form-control" required/>
+                            <option value="non">projet non identifié</option> 
+                        {% for u in liste_projet %}
+                            <option value="{{ u.code}}">{{ u.libelleProjet }} {{ u.libelleEquipe }}</option>  
+                        {% endfor %}    
+                        </select>
+                    </div>
+
+                    <div class="form-group"> <!-- Entrée de l'entreprise -->
+                        <label for="entreprise">Entreprise</label>
+                        <select id="idEntreprise" name="inputIdEntreprise" class="form-control" required/>
+                            <option value="non">Entreprise non identifié</option> 
+                        {% for u in liste_entreprise %}
+                            <option value="{{ u.id}}">{{ u.adresse}} {{ u.cp}} {{ u.ville}} {{ u.nomContact}}</option>  
+                        {% endfor %}    
+                        </select>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button name="btAjouter" type="submit" class="btn btn-purple">Ajouter</button> <!-- Validation du formulaire -->
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Annuler</button> <!-- Annulation du formulaire -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% if infos_page.message_invalid_ajout is defined %} 
+<script>
+    $(document).ready(function(){
+        $("#modal-form-ajout").modal("show");
+    });
+</script>
+{% endif %}

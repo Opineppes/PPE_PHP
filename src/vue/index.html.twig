@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+{% block style %}<link href="css/style-signin.css" rel="stylesheet"> {% endblock %}
+{% block title %} {{ parent() }} Se connecter {% endblock %}
+       
+{% block contenu %}
+
+{% if session.login is not defined %}
+<form class="form-signin" action="index.php?page=connexion" method="post" enctype="application/x-www-form-urlencoded">
+    <h1 class="h3 mb-3 font-weight-normal">Connectez-vous au tableau de bord</h1>
+    <label for="inputEmail" class="sr-only">Email:</label>
+    <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required autofocus>
+    <label for="inputPassword" class="sr-only">Mot de passe:</label>
+    <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Mot de passe" required>
+    <button class="btn btn-lg  btn-block" type="submit" name="btConnecter">Se connecter</button>
+    <a href="index.php?page=inscrire">S'inscrire</a>
+</form>
+{% else %}
+<h1 id="hello-page-message" class="mb-3">Vous êtes connecté sur le tableau de bord</h1>
+{% if session.role == 1 %}
+<div class="card">
+    <div class="card-header bg-purple">En tant qu'administrateur vous avez accès à :</div>
+    <div class="card-body">
+        <ul>
+            <li><a class="purple" href="index.php?page=utilisateur">Gestion des utilisateurs</a></li>
+            <li><a class="purple" href="index.php?page=equipe">Gestion des équipes</a></li>
+        </ul>
+    </div>
+</div>
+{% else %}
+<div class="card">
+    <div class="card-header bg-purple">En tant qu'utilisateur vous avez accès à :</div>
+    <div class="card-body">
+        <ul>
+            <li>Votre compte</li>
+            <li>Votre équipe</li>
+        </ul>
+    </div>
+</div>
+{% endif %}
+{% endif %}      
+
+{% endblock %} 
+

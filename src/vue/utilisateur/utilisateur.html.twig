@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+
+{% block title %} 
+    {{ parent() }} - Gestion des utilisateurs
+{% endblock %}
+
+{% block contenu %}
+
+    {% include 'popup_message.html.twig' %} <!-- Message de succes en cas de suppression reussi -->
+    {% include 'utilisateur/utilisateur_form_modif.html.twig'%} <!-- ajout du formulaire de modification (à modifier en fonction de la page) -->
+
+    <h1 id="hello-page-message" class="mb-3">Gestion des utilisateurs </h1> <!-- Titre en gros sur la page (à modifier en fonction de la page) -->
+    <div class="card">
+        <div class="card-header bg-purple">
+            <div class="row">
+                <div class="col-sm-6">Liste des utilisateurs</div> <!-- Titre de la liste (à modifier en fonction de la page) -->
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr> <!-- Liste des titre des champs (à modifier en fonction de la page) -->
+                        <th>Email</th><th>Nom</th><th>Prenom</th><th>Role</th><th></th><th></th><th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+                {% for u in liste %}
+                <tr> <!-- Liste des valeurs des champs (à modifier en fonction de la page) -->
+                    <td><a class="purple" href="mailto:{{u.email}}"><i class="glyphicon glyphicon-envelope"></i> {{u.email}}</a></td>
+                    <td>{{u.nom}}</td>
+                    <td>{{u.prenom}}</td>
+                    <td>{{u.libelleRole}}</td>
+                    <!-- Lien vers le profil utilisateur (à modifier en fonction de la page) -->
+                    <td><a class="purple" href="index.php?page=utilisateurprofil&email={{u.email}}"><i class="glyphicon glyphicon-user"></i> {% if u.idDev != null %}Profil developpeur{% else %}Profil{% endif %}</a></td>
+                    
+                    <!-- Lien vers la modification (à modifier en fonction de la page) -->
+                    <td><a href="index.php?page=utilisateurmodif&email={{u.email}}"><i class="glyphicon glyphicon-pencil purple"></i></a></td>
+                    <!-- Button de suppression (à modifier en fonction de la page) -->
+                    <td><a href="index.php?page=utilisateursuppr&email={{u.email}}"><i class="glyphicon glyphicon-trash purple"></i></a></td>
+                </tr>
+                {% endfor %}    
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

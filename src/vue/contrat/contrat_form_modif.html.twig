@@ -1,0 +1,90 @@
+{% if infos_page.element_infos is defined %}
+
+<div class="modal" id="modal-form-modif" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="index.php?page=contratmodif" method="post" enctype="application/x-www-form-urlencoded"> <!-- (à modifier en fonction de la page) -->
+                <div class="modal-header">
+                    <h5 class="modal-title">Modification d'un contrat</h5> <!-- Titre du popup d'ajout (à modifier en fonction de la page) -->
+                </div>
+                <div class="modal-body"> <!-- Entrée du formulaire -->
+                    {% if infos_page.message_invalid_modif is defined %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ infos_page.message }} <!-- affichage du message d'erreur -->
+                    </div>
+                    {% endif %}
+
+                    <input name="id" type="hidden" value="{{ infos_page.element_infos.id }}"/> <!-- clef permettant d'idientifier l'element (à modifier en fonction de la page) -->
+
+                    <!-- (à modifier en fonction de la page) -->
+
+                    <div class="form-group"> <!-- Entrée du libellé -->
+                        <label for="libelle">date debut</label>
+                        <input id="dateDebut" name="inputDateDebut" type="date" class="form-control" value="{{ infos_page.element_infos.dateDebut }}" placeholder="Libellé" required>
+                    </div>
+                    <div class="form-group"> <!-- Entrée du libellé -->
+                        <label for="libelle">date fin</label>
+                        <input id="dateFin" name="inputDateFin" type="date" class="form-control"value="{{ infos_page.element_infos.dateFin }}" placeholder="Libellé" required>
+                    </div>                    
+                    <div class="form-group"> <!-- Entrée du libellé -->
+                        <label for="libelle">date signature</label>
+                        <input id="dateSignature" name="inputDateSignature" type="date" class="form-control"value="{{ infos_page.element_infos.dateSignature }}" placeholder="Libellé" required>
+                    </div>                    
+                    <div class="form-group"> <!-- Entrée du libellé -->
+                        <label for="libelle">cout</label>
+                        <input id="cout" name="inputCout" type="text" class="form-control" value="{{ infos_page.element_infos.cout }}" placeholder="Libellé" required>
+                    </div>
+
+
+                    <div class="form-group"> <!-- Entrée du Projet -->
+                        <label for="projet">Projet</label>
+                        <select id="codeProjet" name="inputCodeProjet" class="form-control" required/>
+                        {% if infos_page.element_infos.codeProjet == null %} 
+                            <option value="non" selected>Projet non identifié</option> 
+                        {% else %}
+                            <option value="non">Projet non identifié</option>
+                        {% endif %}      
+                        {% for u in liste_projet %}
+                            {% if infos_page.element_infos.codeProjet == u.code %}  
+                            <option value="{{ u.code }}" selected>{{ u.libelleProjet }} {{ u.idEquipe }}</option> 
+                            {% else %} 
+                            <option value="{{ u.code }}">{{ u.libelleProjet }} {{ u.idEquipe }}</option>
+                            {% endif %}      
+                        {% endfor %}    
+                        </select>
+                    </div>
+                    <div class="form-group"> <!-- Entrée de l'entreprise -->
+                        <label for="entreprise">Entreprise</label>
+                        <select id="idEntreprise" name="inputIdEntreprise" class="form-control" required/>
+                        {% if infos_page.element_infos.idEntreprise == null %} 
+                            <option value="non" selected>entreprise non identifié</option> 
+                        {% else %}
+                            <option value="non">Entreprise non identifié</option>
+                        {% endif %}      
+                        {% for u in liste_entreprise %}
+                            {% if infos_page.element_infos.idEntreprise == u.id %}  
+                            <option value="{{ u.id }}" selected>{{ u.adresse }} {{ u.cp }} {{ u.ville }} {{ u.nomContact }}</option> 
+                            {% else %} 
+                            <option value="{{ u.id}}">{{ u.adresse }} {{ u.cp }} {{ u.ville }} {{ u.nomContact }}</option>
+                            {% endif %}      
+                        {% endfor %}    
+                        </select>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button name="btModifier" type="submit" class="btn btn-purple">Modifier</button> <!-- Validation du formulaire -->
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Annuler</button> <!-- Annulation du formulaire -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $("#modal-form-modif").modal("show");
+    });
+</script>
+
+{% endif %}
